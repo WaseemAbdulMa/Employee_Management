@@ -24,16 +24,17 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
+                    <a class="btn btn-primary" href="{% url 'all_emp' %}" role="button">View All Employees</a>
+                    <a class="btn btn-primary" href="{% url 'add_emp' %}" role="button">Add Employee</a>
+                    <a class="btn btn-primary" href="{% url 'remove_emp' %}" role="button">Remove An Employee</a>
+                    <a class="btn btn-primary" href="{% url 'filter_emp' %}" role="button">Filter Employee Details</a>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout_page' %}">Logout</a>
                     </li>
 
                     <!-- Authenticated User Specific Buttons -->
                     <hr>
-                    <a class="btn btn-primary" href="{% url 'all_emp' %}" role="button">View All Employees</a>
-                    <a class="btn btn-primary" href="{% url 'add_emp' %}" role="button">Add Employee</a>
-                    <a class="btn btn-primary" href="{% url 'remove_emp' %}" role="button">Remove An Employee</a>
-                    <a class="btn btn-primary" href="{% url 'filter_emp' %}" role="button">Filter Employee Details</a>
+                    
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'user_login' %}">Login</a>
