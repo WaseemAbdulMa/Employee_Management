@@ -108,22 +108,33 @@ def filter_emp(request):
 
 
 def sign_up(request):
-    if request.method=='POST':
-        uname=request.POST.get('username')
-        email=request.POST.get('email')
-        password=request.POST.get('password')
-        confirmpassword=request.POST.get('confirmpassword')
-        if password!=confirmpassword:
-            return HttpResponse('password and confirmpassword are not same')
-        #below query represents to create a new user
-        else:
-            my_user=User.objects.create_user(username=uname,email=email,password=password)
-            my_user.save()
-            return redirect('user_login')
-        
-        
-        
-    return render(request,'signup.html',{})
+    if request.method == 'POST':
+        uname = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        confirmpassword = request.POST.get('confirmpassword')
+
+        # Check if password and confirm password match
+        if password != confirmpassword:
+            return render(request, 'signup.html', {'error': 'Passwords do not match'})
+
+        # Check if the username already exists
+        if User.objects.filter(username=uname).exists():
+            return render(request, 'signup.html', {'error': 'Username already exists'})
+
+        # Check if the email already exists
+        if User.objects.filter(email=email).exists():
+            return render(request, 'signup.html', {'error': 'Email already exists'})
+
+        # If both validations pass, create the user
+        my_user = User.objects.create_user(username=uname, email=email, password=password)
+        my_user.save()
+
+        # Redirect to the login page after successful signup
+        return redirect('user_login')
+
+    # GET request or if there's an error, render the signup page again
+    return render(request, 'signup.html')
 
 
 def user_login(request):
@@ -135,7 +146,7 @@ def user_login(request):
             login(request,user)
             return redirect('all_emp')
         else:
-            return HttpResponse("username password are in correct")
+            return render(request, 'login.html', {'error': 'Username or password is incorrect.'})
         
     return render(request,'login.html',{})
 

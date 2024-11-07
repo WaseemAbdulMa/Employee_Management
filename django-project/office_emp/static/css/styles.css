@@ -1,0 +1,8 @@
+.home-link {
+    color: green;           /* Set the text color to green */
+    text-decoration: underline; /* Add an underline */
+}
+
+.home-link:hover {
+    text-decoration: none; /* Remove underline on hover if desired */
+}

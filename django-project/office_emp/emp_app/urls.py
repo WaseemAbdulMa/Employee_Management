@@ -1,4 +1,4 @@
-from django.urls import path,include
+from django.urls import path
 from  emp_app import views
 
 urlpatterns = [
@@ -10,7 +10,6 @@ urlpatterns = [
     path('remove_emp/',views.remove_emp,name='remove_emp'),
     path('filter_emp/',views.filter_emp,name='filter_emp'),
     path('sign_up/',views.sign_up,name='sign_up'),
-    
-    path('logout/',views.logout_page,name='logout_page')
+    path('logout/',views.logout_page,name='logout_page'),
     
 ]
